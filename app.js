@@ -40,7 +40,7 @@ yargs.command({
     }
   },
   handler(arvg) {
-    console.log('Removing note');
+    list.removeItems(argv.title);
   }
 });
 
@@ -54,15 +54,15 @@ yargs.command({
       type: 'string'
     }
   },
-  handler() {
-    console.log('Reading an item');
+  handler(argv) {
+    list.readItems(argv.title);
   }
 });
 
 yargs.command({
   command: 'list',
   describe: 'List all items',
-  hander() {
+  handler() {
     list.listItems();
   }
 });

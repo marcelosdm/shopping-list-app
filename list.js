@@ -9,6 +9,8 @@ const listItems = () => {
   const list = items.map(item => {
     console.log(chalk.blue(`${item.title}`));
   });
+
+  return list;
 };
 
 const addItems = (title, body, amount) => {
@@ -30,6 +32,33 @@ const addItems = (title, body, amount) => {
   }
 };
 
+const removeItems = title => {
+  const items = loadList();
+
+  const itemsToKeep = items.filter(item => item.title !== title);
+
+  if (items.length > itemsToKeep.length) {
+    console.log(chalk.bgGreen('Item removed from the Shopping List'));
+  } else {
+    console.log(chalk.bgRed('Item not found'));
+  }
+
+  saveList(itemsToKeep);
+};
+
+const readItems = title => {
+  const items = loadList();
+
+  const item = items.find(item => item.title === title);
+
+  if (item) {
+    console.log(chalk.bgBlue(`Reading item: ${item.title}`));
+    console.log(`${item.body} - amount: ${item.amount}`);
+  } else {
+    console.log(chalk.bgRed('Item not found'));
+  }
+};
+
 const saveList = items => {
   const dataJSON = JSON.stringify(items);
   fs.writeFileSync('shopping-list.json', dataJSON);
@@ -45,4 +74,4 @@ const loadList = () => {
   }
 };
 
-module.exports = { listItems, addItems };
+module.exports = { listItems, addItems, removeItems, readItems };
