@@ -39,7 +39,7 @@ yargs.command({
       type: 'string'
     }
   },
-  handler(arvg) {
+  handler(argv) {
     list.removeItems(argv.title);
   }
 });
